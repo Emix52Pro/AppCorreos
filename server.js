@@ -21,17 +21,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
  */
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-/**
- * Establecer EJS como el Motor de plantillas
- */
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
 
 /**
  * Definiendo mi ruta Home
  */
 app.get("/", (req, res) => {
-    res.render("inicio");
+    res.sendFile(path.join(__dirname, "views", "inicio.html"));
 });
 
 // Configuración de multer
@@ -92,7 +87,7 @@ app.post("/procesar-email", upload.single("fileAdjunto"), (req, res) => {
         }
     });
 
-    res.render("inicio");
+    res.sendFile(path.join(__dirname, "views", "inicio.html"));
 });
 
 // Iniciar el servidor con Express
